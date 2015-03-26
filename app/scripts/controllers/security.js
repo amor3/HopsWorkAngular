@@ -5,8 +5,7 @@ angular.module('hopsWorksApp')
   .controller('SecurityCtrl', ['$scope', '$cookies', '$http', '$location', function ($scope, $cookies, $http, $location) {
 
   	// those are the parameters that we are passing by
-  	$scope.username = '';
-  	$scope.password = '';
+  	$scope.user = {username: '', password: ''};
   	$scope.isLoggedIn = false;
   	$scope.message = '';
   	$scope.projectName = '';
@@ -19,8 +18,8 @@ angular.module('hopsWorksApp')
 	$scope.login = function() {
 
   		$http.post(
-  			'http://localhost:8080/HopsWorks/rest-api/auth/login/', 
-  			'username=' + $scope.username + '&' + 'password=' + $scope.password // Convert it to form data for now
+  			'http://localhost:8080/hopsworks/webresources/auth/login', 
+  			'email=' + $scope.user.username + '&' + 'password=' + $scope.user.password // Convert it to form data for now
   			)
   		.success(function(data) {
   			console.log('You are now logged in.. Great.. Really');
@@ -39,7 +38,7 @@ angular.module('hopsWorksApp')
   			console.log(data);
   		});
 
-	  	$scope.password = '';
+	  	$scope.user.password = '';
   };
 
 
